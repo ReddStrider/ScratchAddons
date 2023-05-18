@@ -20,7 +20,7 @@
     ],
     "settings": [
         {
-          "name": "Complimentary colored links",
+          "name": "Complimentary colored links (kinda broken)",
           "id": "comp-link",
           "type": "boolean",
           "default": false
