@@ -1,0 +1,32 @@
+{
+    "name": "Ocular color page backgrounds",
+    "description": "User pages will use their ocular status color as the background color of the page",
+    "tags": ["theme", "featured"],
+    "credits": [
+      {
+        "name": "RedStrider",
+        "link": "https://scratch.mit.edu/users/therealRedStrider/"
+      }
+    ],
+    "userscripts": [
+        {
+            "url": "ocular_pages.js",
+            "matches": ["https://scratch.mit.edu/users/*"],
+            "runAtComplete": false,
+            "if": {
+              "settings": { "ocularColors": true }
+            }
+        }
+    ],
+    "settings": [
+        {
+          "name": "Complimentary colored links",
+          "id": "comp-link",
+          "type": "boolean",
+          "default": false
+        }
+    ],
+    "enabledByDefault": false,
+    "libraries": ["tinycolor2"]
+  }
+  
