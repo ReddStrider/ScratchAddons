@@ -7,6 +7,7 @@ export default async function ({ addon, console, msg }) {
     var pageColor = "";
     var bottomColor = "";
     var linkColor = "";
+    var replyColor = "";
     var hue = "";
 
     let comments;
@@ -32,30 +33,46 @@ export default async function ({ addon, console, msg }) {
 
     OcularColor(username)
         .then(color => {
-            const hue = tinycolor(color).toHsl().h;
+            const color = tinycolor(color).toHsl();
 
-            pageColor = tinycolor("#174082").toHsl();
-            bottomColor = tinycolor("#12233d").toHsl();
-            linkColor = tinycolor("#69a5ff").toHsl();
+            //pageColor = tinycolor("#0d3e8c").toHsl();
+            //bottomColor = tinycolor("#153463").toHsl();
+            //replyColor = tinycolor("#114799").toHsl();
+            //linkColor = tinycolor("#3b79db").toHsl();
 
-            pageColor.h = hue;
-            bottomColor.h = hue - 10;
+            pageColor = color;
+            replyColor = color;
+            bottomColor = color - 8;
 
+            replyColor = tinycolor(replyColor).spin(5).toHexString();
+            pageColor = tinycolor(pageColor).toHexString();
+            bottomColor = tinycolor(bottomColor).toHexString();
 
-            const pageColorHex = tinycolor(pageColor).toHexString();
-            const bottomColorHex = tinycolor(bottomColor).toHexString();
+            //linkColor.h = (hue + 180) % 360;
 
-            linkColor.h = (hue + 180) % 360;
+            linkColor.h = linkColor.spin(360)
 
-            const linkColorHex = tinycolor(linkColor).toHexString();
+            linkColor = tinycolor(linkColor).toHexString();
 
             if (color != undefined) {
-                page.style.backgroundColor = pageColorHex
-                comments.style.backgroundColor = bottomColorHex
+
+                if (addon.settings.get("gradient") == false) {
+                    page.style.backgroundColor = pageColor;
+                    comments.style.backgroundColor = bottomColor;
+                } else{
+                    page.style= "background-image: linear-gradient("+pageColor+", "+tinycolor(pageColor).darken(20).spin(-5).toHexString()+");";
+                    comments.style= "background-image: linear-gradient("+bottomColor+", "+tinycolor(bottomColor).darken(20).spin(10).toHexString()+");";
+                }
+
+
+                const moreRepStyle = document.createElement('style');
+                moreRepStyle.innerHTML = " .more-replies{ background-color: " + bottomColor + " !important; box-shadow:  0px -20px 40px 50px " + bottomColor + " !important; } .more-replies span{ background-color: " + bottomColor + " !important; } .highlighted{ background-color:" + replyColor + " !important; box-shadow: none !important; padding: 5px !important; margin: 10px !important;}";
+                document.head.appendChild(moreRepStyle);
+
                 if (addon.settings.get("comp-link") == true) {
                     const linkStyle = document.createElement('style');
-                    linkStyle.innerHTML = "a:not(:has(*)) { color: " + linkColorHex + " !important; } .button a { color: initial !important; } footer * { color: initial !important; }";
-                    console.log(linkStyle);
+                    linkStyle.innerHTML = ".title a { color: " + linkColor + " !important; } .name a { color: " + linkColor + " !important; } .activity-stream li div a { color: " + linkColor + " !important; }";
+                    //console.log(linkStyle);
                     document.head.appendChild(linkStyle);
                 }
                 //console.log(addon.settings.get("comp-link"));
