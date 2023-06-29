@@ -1,7 +1,7 @@
 {
     "name": "Ocular color page backgrounds",
-    "description": "Adds some nice cosmetic flair as user pages will use their ocular status color as the background color of the page",
-    "tags": ["theme", "featured", "beta"],
+    "description": "Adds some nice cosmetic flair as user pages will use their ocular status color as the background color of the page. In develepment and might not work,",
+    "tags": ["theme", "beta"],
     "credits": [
       {
         "name": "RedStrider",
