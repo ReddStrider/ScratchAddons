@@ -1,0 +1,32 @@
+{
+    "name": "Compact What's Happening?",
+    "description": "Colapse the What's Happening? feed to make it ",
+    "tags": [
+        "theme",
+        "beta"
+    ],
+    "credits": [
+        {
+            "name": "RedStrider",
+            "link": "https://scratch.mit.edu/users/therealRedStrider/"
+        }
+    ],
+    "userscripts": [
+        {
+            "url": "collapse.js",
+            "matches": [
+                "https://scratch.mit.edu"
+            ],
+            "runAtComplete": false
+        }
+    ],
+    "userstyles": [
+        {
+            "url": "collapse.css",
+            "matches": [
+                "https://scratch.mit.edu"
+            ]
+        }
+    ],
+    "enabledByDefault": false
+}
